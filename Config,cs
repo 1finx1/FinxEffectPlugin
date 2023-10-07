@@ -1,0 +1,60 @@
+using Rocket.API;
+using System.Collections.Generic;
+
+namespace SpeedBoostPlugin
+{
+    public class ConsumableEffect
+    {
+        public ushort ConsumableID { get; set; }
+        public float Duration { get; set; }
+        public float Multiplier { get; set; }
+        public float HealingAmount { get; set; }
+        public float HealingInterval { get; set; } 
+        public string Effect { get; set; }
+
+        public bool IsSpeedBoost => Effect == "SpeedBoost";
+        public bool IsJumpBoost => Effect == "JumpBoost";
+        public bool IsHealing => Effect == "Healing"; 
+    }
+
+
+    public class SpeedBoostConfiguration : IRocketPluginConfiguration
+    {
+        public List<ConsumableEffect> ConsumableEffects = new List<ConsumableEffect>();
+
+        public void LoadDefaults()
+        {
+
+            ConsumableEffects.Add(new ConsumableEffect
+            {
+                ConsumableID = 15, // Change this to the ID of the first consumable.
+                Duration = 10.0f,   // Change this to the duration of the effect for the first consumable in seconds.
+                Multiplier = 2.0f, // Change this to the speed multiplier for the first consumable.
+                HealingAmount = 0.0f, // Default healing amount for the first consumable
+                HealingInterval = 0.0f, // Default healing interval for the first consumable
+                Effect = "SpeedBoost" // Specify the effect type as "SpeedBoost" for the first consumable.
+            });
+
+            ConsumableEffects.Add(new ConsumableEffect
+            {
+                ConsumableID = 92, // Change this to the ID of the second consumable.
+                Duration = 15.0f,   // Change this to the duration of the effect for the second consumable in seconds.
+                Multiplier = 1.5f, // Change this to the speed multiplier for the second consumable.
+                HealingAmount = 0.0f, // Default healing amount for the second consumable
+                HealingInterval = 0.0f, // Default healing interval for the second consumable
+                Effect = "JumpBoost" // Specify the effect type as "JumpBoost" for the second consumable.
+            });
+
+            ConsumableEffects.Add(new ConsumableEffect
+            {
+                ConsumableID = 473, // Change this to the ID of the second consumable.
+                Duration = 15.0f,   // Change this to the duration of the effect for the second consumable in seconds.
+                
+                HealingAmount = 5.0f, // Default healing amount for the second consumable
+                HealingInterval = 2.0f, // Default healing interval for the second consumable
+                Effect = "Healing" // Specify the effect type as "JumpBoost" for the second consumable.
+            });
+
+        }
+    }
+}
